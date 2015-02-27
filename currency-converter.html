@@ -1,0 +1,109 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../bower_components/paper-dropdown/paper-dropdown.html">
+<link rel="import" href="../bower_components/core-menu/core-menu.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/paper-input/paper-input-decorator.html">
+<link rel="import" href="../bower_components/core-input/core-input.html">
+
+<polymer-element name="currency-converter" attributes="amount fromCurrency toCurrency">
+  <template>
+    <style>
+      :host {
+        display: block;
+        background-color: #fff;
+        padding: 10px;
+        box-shadow: 0 1px 5px rgba(0,0,0, 0.4);
+      }
+      .swap {
+        padding: 0.5em;
+        cursor: pointer;
+      }
+    </style>
+
+    <header>
+      <h1>Currency Converter</h1>
+    </header>
+
+    <section>
+      <paper-input-decorator floatingLabel label="Amount">
+        <input is="core-input" type="number" value="{{ amount }}">
+      </paper-input-decorator>
+
+      <div layout horizontal center-center>
+        <paper-dropdown-menu label="From" flex>
+          <paper-dropdown class="dropdown">
+            <core-menu class="menu" selected="{{ fromCurrency }}">
+              <template repeat="{{ c in currencies }}">
+                <paper-item>{{ c.name }}</paper-item>
+              </template>
+            </core-menu>
+          </paper-dropdown>
+        </paper-dropdown-menu>
+
+        <div class="swap" on-tap="{{ swap }}">
+          <core-icon icon="swap-horiz"></core-icon>
+        </div>
+
+        <paper-dropdown-menu label="To" flex>
+          <paper-dropdown class="dropdown">
+            <core-menu class="menu" selected="{{ toCurrency }}">
+              <template repeat="{{ c in currencies }}">
+                <paper-item>{{ c.name }}</paper-item>
+              </template>
+            </core-menu>
+          </paper-dropdown>
+        </paper-dropdown-menu>
+
+      </div>
+    </section>
+
+    <section class="result" flex hidden?="{{ !(amount >= -100000 && fromCurrency >= 0 && toCurrency >= 0) }}">
+      <p class="description">
+        {{ amount + ' ' + currencies[fromCurrency].name + ' in ' + currencies[toCurrency].name }}:
+      </p>
+      <p class="result-number">
+        {{ (amount * (currencies[fromCurrency].relativeValue / currencies[toCurrency].relativeValue)) | toFixed(2) }}
+      </p>
+    </section>
+  </template>
+  <script>
+    Polymer({
+      /**
+       * The data model holds currencies' names and relative values.
+       */
+      currencies: [
+        {
+          name: "EUR",
+          relativeValue: 1.13085
+        }, {
+          name: "SEK",
+          relativeValue: 0.1189895
+        }, {
+          name: "USD",
+          relativeValue: 1.0
+        }, {
+          name: "NOK",
+          relativeValue: 0.1311897
+        }, {
+          name: "JPY",
+          relativeValue: 0.00836764
+        }
+      ],
+      /**
+       * Filter for bringing numbers to a defined precision.
+       */
+      toFixed: function(value, precision) {
+        return Number(value).toFixed(precision);
+      },
+      /**
+       * Method that swaps the two selected currencies with each other.
+       */
+      swap: function () {
+        var temp = this.fromCurrency;
+        this.fromCurrency = this.toCurrency;
+        this.toCurrency = temp;
+      }
+    });
+  </script>
+</polymer-element>

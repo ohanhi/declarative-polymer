@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Experiments</title>
+  <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
+  <link rel="stylesheet" href="bower_components/open-sans-fontface/open-sans.css">
+  <link rel="import" href="currency-converter.html">
+  <style>
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    font-family: "Open Sans";
+    background-color: #eee;
+    background-image: linear-gradient(to bottom, #eee 0%, #efefe 20%, #eee 100%);
+  }
+  body > div {
+    flex: 1 1 33%;
+    min-width: 300px;
+    padding: 10px;
+  }
+  body > div > * {
+  }
+  html /deep/ h1,
+  html /deep/ h2,
+  html /deep/ h3 {
+    font-weight: 100;
+  }
+  </style>
+</head>
+<body unresolved layout horizontal wrap>
+  <div>
+    <currency-converter></currency-converter>
+    <p>No attributes set</p>
+    <pre>&lt;currency-converter&gt;&lt;/currency-converter&gt;</pre>
+  </div>
+  <div>
+    <currency-converter
+      fromCurrency=0
+      toCurrency=1></currency-converter>
+    <p>Currencies preset</p>
+    <pre>&lt;currency-converter
+    fromCurrency=0
+    toCurrency=1&gt;&lt;/currency-converter&gt;</pre>
+  </div>
+  <div>
+    <currency-converter
+      amount=250
+      fromCurrency=3
+      toCurrency=1></currency-converter>
+    <p>Amount and currencies preset</p>
+    <pre>&lt;currency-converter
+    amount=250
+    fromCurrency=3
+    toCurrency=1&gt;&lt;/currency-converter&gt;</pre>
+  </div>
+</body>
+</html>
