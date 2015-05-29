@@ -25,6 +25,12 @@
   },
   "resolutions": {
     "polymer": "^1.0.0",
-    "webcomponentsjs": "^0.7.2"
+    "webcomponentsjs": "^0.7.2",
+    "paper-input": "^1.0.0",
+    "paper-item": "^1.0.0",
+    "paper-button": "^1.0.0",
+    "paper-icon-button": "^1.0.0",
+    "paper-ripple": "^1.0.0",
+    "web-animations-js": "^2.0.0"
   }
 }
