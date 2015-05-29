@@ -58,8 +58,8 @@
     </section>
 
     <section class="result flex">
-      <p class="description">{{ _computeDescription(amount, currencies, fromCurrency, toCurrency) }}</p>
-      <p class="result-number">{{ _computeResult(amount, currencies, fromCurrency, toCurrency) }}</p>
+      <p class="description">{{ description }}</p>
+      <p class="result-number">{{ result }}</p>
     </section>
   </template>
 </dom-module>
@@ -90,22 +90,43 @@
           }
         ]
       },
+      amount: {
+        type: Number,
+        value: 1,
+      },
       toCurrency: Number,
       fromCurrency: Number,
-      amount: Number
+      description: {
+        type: String,
+        computed: 'computeDescription(amount, currencies, fromCurrency, toCurrency)'
+      },
+      result: {
+        type: String,
+        computed: 'computeResult(amount, currencies, fromCurrency, toCurrency)'
+      }
     },
 
-    _computeDescription: function(amount, currencies,
+    computeDescription: function(amount, currencies,
       fromCurrency, toCurrency) {
-        return amount + ' ' +
-          currencies[fromCurrency].name +
-          ' in ' +
-          currencies[toCurrency].name;
+        if (typeof currencies === "object" &&
+          typeof (amount+fromCurrency+toCurrency) === "number") {
+          return amount + ' ' +
+            currencies[fromCurrency].name +
+            ' in ' +
+            currencies[toCurrency].name;
+        } else {
+          return '';
+        }
     },
 
-    _computeResult: function(amount, currencies,
+    computeResult: function(amount, currencies,
       fromCurrency, toCurrency) {
-      return (amount * (currencies[fromCurrency].relativeValue / currencies[toCurrency].relativeValue)).toFixed(2);
+      if (typeof currencies === "object" &&
+          typeof (amount+fromCurrency+toCurrency) === "number") {
+        return (amount * (currencies[fromCurrency].relativeValue / currencies[toCurrency].relativeValue)).toFixed(2);
+      } else {
+        return '';
+      }
     },
 
     /**
