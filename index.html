@@ -4,6 +4,7 @@
   <title>Experiments</title>
   <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
   <link rel="stylesheet" href="bower_components/open-sans-fontface/open-sans.css">
+  <link rel="import" href="bower_components/iron-flex-layout/iron-flex-layout.html">
   <link rel="import" href="elements/currency-converter.html">
   <style>
   * {
@@ -28,7 +29,7 @@
   }
   </style>
 </head>
-<body unresolved layout horizontal wrap>
+<body class="layout horizontal wrap">
   <div>
     <currency-converter></currency-converter>
     <p>No attributes set</p>
@@ -36,23 +37,23 @@
   </div>
   <div>
     <currency-converter
-      fromCurrency=0
-      toCurrency=1></currency-converter>
+      from-currency=0
+      to-currency=1></currency-converter>
     <p>Currencies preset</p>
     <pre>&lt;currency-converter
-    fromCurrency=0
-    toCurrency=1&gt;&lt;/currency-converter&gt;</pre>
+    from-currency=0
+    to-currency=1&gt;&lt;/currency-converter&gt;</pre>
   </div>
   <div>
     <currency-converter
       amount=250
-      fromCurrency=3
-      toCurrency=1></currency-converter>
+      from-currency=3
+      to-currency=1></currency-converter>
     <p>Amount and currencies preset</p>
     <pre>&lt;currency-converter
     amount=250
-    fromCurrency=3
-    toCurrency=1&gt;&lt;/currency-converter&gt;</pre>
+    from-currency=3
+    to-currency=1&gt;&lt;/currency-converter&gt;</pre>
   </div>
 </body>
 </html>
