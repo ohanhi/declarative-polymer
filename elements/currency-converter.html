@@ -34,7 +34,7 @@
     <section>
       <paper-input-container always-float-label="true">
         <label>Amount</label>
-        <input is="iron-input" type="number" value="{{ amount }}">
+        <input is="iron-input" type="number" bind-value="{{ amountStr }}">
       </paper-input-container>
 
       <div class="layout horizontal center-center">
@@ -90,24 +90,22 @@
           }
         ]
       },
-      amount: {
-        type: Number,
-        value: 1,
-      },
+      amountStr: String,
       toCurrency: Number,
       fromCurrency: Number,
       description: {
         type: String,
-        computed: 'computeDescription(amount, currencies, fromCurrency, toCurrency)'
+        computed: 'computeDescription(amountStr, currencies, fromCurrency, toCurrency)'
       },
       result: {
         type: String,
-        computed: 'computeResult(amount, currencies, fromCurrency, toCurrency)'
+        computed: 'computeResult(amountStr, currencies, fromCurrency, toCurrency)'
       }
     },
 
-    computeDescription: function(amount, currencies,
+    computeDescription: function(amountStr, currencies,
       fromCurrency, toCurrency) {
+        var amount = Number(amountStr);
         if (typeof currencies === "object" &&
           typeof (amount+fromCurrency+toCurrency) === "number") {
           return amount + ' ' +
@@ -119,8 +117,9 @@
         }
     },
 
-    computeResult: function(amount, currencies,
+    computeResult: function(amountStr, currencies,
       fromCurrency, toCurrency) {
+      var amount = Number(amountStr);
       if (typeof currencies === "object" &&
           typeof (amount+fromCurrency+toCurrency) === "number") {
         return (amount * (currencies[fromCurrency].relativeValue / currencies[toCurrency].relativeValue)).toFixed(2);
