@@ -34,7 +34,7 @@
     <section>
       <paper-input-container always-float-label="true">
         <label>Amount</label>
-        <input is="iron-input" type="number" bind-value="{{ amountStr }}">
+        <input is="iron-input" type="number" bind-value="{{ amount }}">
       </paper-input-container>
 
       <div class="layout horizontal center-center">
@@ -90,16 +90,16 @@
           }
         ]
       },
-      amountStr: String,
+      amount: String,
       toCurrency: Number,
       fromCurrency: Number,
       description: {
         type: String,
-        computed: 'computeDescription(amountStr, currencies, fromCurrency, toCurrency)'
+        computed: 'computeDescription(amount, currencies, fromCurrency, toCurrency)'
       },
       result: {
         type: String,
-        computed: 'computeResult(amountStr, currencies, fromCurrency, toCurrency)'
+        computed: 'computeResult(amount, currencies, fromCurrency, toCurrency)'
       }
     },
 
